@@ -1,2 +1,7 @@
+    <div class="main-content"style="font-family: 'Roboto', sans-serif; ">
+        <?php echo $content; ?>
+    </div>
 
-<?php echo $content; ?>
+    </body>
+    </html>
+

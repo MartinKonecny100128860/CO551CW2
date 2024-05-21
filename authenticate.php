@@ -1,24 +1,28 @@
 <?php
+include("_includes/config.inc");
+include("_includes/dbconnect.inc");
+include("_includes/functions.inc");
 
-   include("_includes/config.inc");
-   include("_includes/dbconnect.inc");
-   include("_includes/functions.inc");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $studentid = mysqli_real_escape_string($conn, $_POST['txtid']);
+    $password = mysqli_real_escape_string($conn, $_POST['txtpwd']);
 
-   // If the student has already been authenticated the $_SESSION['id'] variable
-   // will been assigned their student id.
+    // Check user credentials
+    $sql = "SELECT * FROM student WHERE studentid = '$studentid'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
 
-
-   // redirect to index if $_POST values not set or $_SESSION['id'] is already set
-   if (!isset($_POST['txtid']) || !isset($_POST['txtpwd']) || isset($_SESSION['id'])) {
-      header("Location: index.php");
-	} else {
-      if (validatelogin($_POST['txtid'],$_POST['txtpwd']) == true) {
-         // valid
-         header("Location: index.php?return=success");
-      } else {
-         // invalid
-         unset($_SESSION['id']);
-         header("Location: index.php?return=fail");
-      }
-	}
+    if ($row && password_verify($password, $row['password'])) {
+        // Successful login
+        $_SESSION['id'] = $row['studentid'];
+        header("Location: index.php");
+        exit;
+    } else {
+        // Invalid credentials
+        $message = "Invalid Student ID or Password.";
+        header("Location: login.php?error=" . urlencode($message));
+        exit;
+    }
+}
 ?>
+
