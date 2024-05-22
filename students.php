@@ -4,8 +4,8 @@ include("_includes/dbconnect.inc");
 include("_includes/functions.inc");
 
 // This block of code checks if the admin / user is logged in
-// if the user isnt logged in, they will be redirected to login page
-// they must be logged in to view table with all the students. 
+// if the user isn't logged in, they will be redirected to login page
+// they must be logged in to view the table with all the students. 
 if (isset($_SESSION['id'])) {
     echo template("templates/partials/header.php");
     echo template("templates/partials/nav.php");
@@ -40,6 +40,7 @@ if (isset($_SESSION['id'])) {
                             </tr>";
         // Fetch each record as an associative array
         while ($row = mysqli_fetch_assoc($result)) {
+            $imageData = base64_encode($row['image_path']);
             $data['content'] .= "<tr>
                                     <td><input type='checkbox' name='students[]' value='{$row['studentid']}'></td>
                                     <td>{$row['studentid']}</td>
@@ -51,7 +52,7 @@ if (isset($_SESSION['id'])) {
                                     <td>{$row['county']}</td>
                                     <td>{$row['country']}</td>
                                     <td>{$row['postcode']}</td>
-                                    <td><img src='{$row['image_path']}' alt='Student Image' style='width: 50px; height: auto;'></td>
+                                    <td><img src='data:image/jpeg;base64,{$imageData}' alt='Student Image' style='width: 50px; height: auto;'></td>
                                 </tr>";
         }
 

@@ -24,9 +24,11 @@ if (isset($_SESSION['id'])) {
     echo template("templates/partials/header.php");
     echo template("templates/partials/nav.php");
     echo "
-    <div class='table-container' style='margin-top: 100px; margin-left: 450px;'>
-        <h1 class='modules-heading'>MY CURRENT MODULES</h1> <!-- Heading above the table -->
-        $tableContent
+    <div class='table-wrapper'>
+        <div class='table-container'>
+            <h1 class='modules-heading'>MY CURRENT MODULES</h1> <!-- Heading above the table -->
+            $tableContent
+        </div>
     </div>";
 } else {
     header("Location: index.php");
@@ -40,24 +42,41 @@ echo template("templates/partials/footer.php");
 /* CSS Styles */
 body {
     font-family: 'Roboto', sans-serif; /* Add font family */
+    margin: 0;
+    height: 100vh; /* Full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .module-table {
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid #ddd;
     margin: 0 auto;
     font-family: 'Roboto', sans-serif; /* Add font family */
+    border-radius: 10px; /* Round edges of the table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    overflow: hidden; /* Clip children to rounded corners */
 }
 
 .module-table th, .module-table td {
     padding: 12px;
     text-align: left;
+    transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
 .module-table th {
     background-color: #f2f2f2;
     font-size: 18px;
+    border-bottom: 2px solid #ddd;
 }
 
 .module-table td {
@@ -65,20 +84,33 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
+/* Add alternating row colors */
+.module-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.module-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
 /* Add hover effect */
 .module-table tbody tr:hover {
-    background-color: #BCBAC5;
+    background-color: #e0e0e0;
 }
 
 .table-container {
-    max-width: 800px;
-    margin: 70px auto; /* Adjust top margin */
-    overflow-x: auto;
+    max-width: 1400px; /* Increase max-width for a wider box */
+    margin-left: 100px; /* Move the table container slightly to the right */
+    padding: 20px;
+    background-color: #fff; /* Background color for container */
+    border-radius: 10px; /* Rounded corners for container */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Shadow for container */
     text-align: center; /* Center the heading */
 }
 
 .modules-heading {
     font-size: 40px; /* Heading font size */
     margin-bottom: 20px; /* Space between heading and table */
+    color: #333; /* Color for heading */
 }
 </style>

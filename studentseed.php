@@ -1,10 +1,18 @@
 <?php
-// these three lines include necessary configuration, database connection, and functions files
+// Include necessary configuration, database connection, and functions files
 include("_includes/config.inc");
 include("_includes/dbconnect.inc");
 include("_includes/functions.inc");
 
-// student details which will be seeded to the database. Each student is represented as an associative array
+// Function to read image file and return its binary data
+function getImageData($imagePath, $conn) {
+    // Read the image file
+    $imageData = file_get_contents($imagePath);
+    // Return binary data
+    return mysqli_real_escape_string($conn, $imageData);
+}
+
+// Student details which will be seeded to the database. Each student is represented as an associative array
 $students = [
     [
         'studentid' => '3105',
@@ -73,8 +81,11 @@ $students = [
     ]
 ];
 
-// This block of code loops through each student in an array. Creates an SQL INSERT query for the current student's details
+// Loop through each student in the array and insert their details into the database
 foreach ($students as $student) {
+    // Read image data
+    $imageData = getImageData($student['image_path'], $conn);
+    // Insert data into student table
     $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode, image_path) VALUES (
         '{$student['studentid']}',
         '{$student['password']}',
@@ -86,18 +97,17 @@ foreach ($students as $student) {
         '{$student['county']}',
         '{$student['country']}',
         '{$student['postcode']}',
-        '{$student['image_path']}'
+        '{$imageData}'
     );";
     
-    // Execute the SQL query and check if it was successful, dispalys either success message or an error message 
+    // Execute the SQL query and check if it was successful, displays either a success message or an error message 
     if (mysqli_query($conn, $sql)) {
-        echo "Record for student ID {$student['studentid']} inserted successfully.<br>";
+        echo "<div style='text-align: center;'>Record for student ID {$student['studentid']} inserted successfully.</div><br>";
     } else {
-        echo "Error inserting record for student ID {$student['studentid']}: " . mysqli_error($conn) . "<br>";
+        echo "<div style='text-align: center;'>Error inserting record for student ID {$student['studentid']}: " . mysqli_error($conn) . "</div><br>";
     }
 }
 
-// closes data base connection
+// Close database connection
 mysqli_close($conn);
 ?>
-
