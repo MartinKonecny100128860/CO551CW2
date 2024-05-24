@@ -6,7 +6,10 @@
         <title>Navigation</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <style>
-            @import url('https://fonts.googleapis.com/css?family=Montserrat');
+            /* Import Montserrat font */
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+            /* Side Navigation Styles */
             .sidenav {
                 height: 100%;
                 width: 220px;
@@ -20,12 +23,14 @@
                 text-align: center;
             }
 
+            /* Logo Styles */
             .logo img {
                 width: 200px;
                 height: auto;
                 margin-bottom: 20px;
             }
 
+            /* Navigation Links Styles */
             .sidenav a {
                 padding: 12px 8px;
                 text-decoration: none;
@@ -40,23 +45,27 @@
                 margin-bottom: 8px;
             }
 
+            /* Icon Styles */
             .sidenav a img {
                 width: 32px;
                 height: 32px;
                 margin-right: 10px;
             }
 
+            /* Text Styles */
             .sidenav a span {
                 font-family: 'Roboto', sans-serif;
                 padding-left: 8px;
             }
 
+            /* Hover Styles */
             .sidenav a:hover {
                 color: #f1f1f1;
                 cursor: pointer;
                 font-size: 1.1em;
             }
 
+            /* Main Content Styles */
             .main-content {
                 margin-left: 120px;
                 padding: 20px;
@@ -65,11 +74,15 @@
     </head>
     
     <body>
+        <!-- Div for entire side navigation bar -->
         <div class="sidenav">
+            <!-- Section for logo -->
             <div class="logo">
                 <img src="Logo.png" alt="Logo">
             </div>
+            <!-- Navigation links -->
             <a href="index.php">
+                <!-- font awesome icons -->
                 <i class="fa fa-info-circle"></i>
                 <span>Index</span>
             </a>
