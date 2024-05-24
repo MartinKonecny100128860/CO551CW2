@@ -1,21 +1,22 @@
 <?php
 
-    function template($template_path, $data) {
-        ob_start();
-        include $template_path;
-        return ob_get_clean();
-    }
+function template($template_path, $data) {
+    ob_start();
+    include $template_path;
+    return ob_get_clean();
+}
 
-    include("_includes/config.inc");
-    include("_includes/dbconnect.inc");
+include("_includes/config.inc");
+include("_includes/dbconnect.inc");
 
-    echo template("templates/partials/header.php", $data);
-    echo template("templates/partials/nav.php", $data);
+echo template("templates/partials/header.php", $data);
+echo template("templates/partials/nav.php", $data);
+
 ?>
 
-<div class="main-content" style="margin-left: 240px; font-family: 'Roboto', sans-serif; font-size: 18px; background-color: #f4f4f4;"> 
+<div class="main-content" style="margin-left: 240px; font-family: 'Roboto', sans-serif; font-size: 18px; background-color: #f4f4f4;">
     <?php
-    // // Sanitize and escape user input to prevent SQL injection attacks
+    // Collect form data and sanitize
     $studentid = mysqli_real_escape_string($conn, $_POST['studentid']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $dob = mysqli_real_escape_string($conn, $_POST['dob']);
@@ -26,10 +27,19 @@
     $county = mysqli_real_escape_string($conn, $_POST['county']);
     $country = mysqli_real_escape_string($conn, $_POST['country']);
     $postcode = mysqli_real_escape_string($conn, $_POST['postcode']);
+    $file = $_FILES['image'];
+
+    // Validate file upload
+    $allowedTypes = ['image/jpeg', 'image/png'];
+    $fileType = mime_content_type($file['tmp_name']);
+    if (!in_array($fileType, $allowedTypes)) {
+        echo "<p>Error: Invalid file type. Only JPEG and PNG are allowed.</p>";
+        exit;
+    }
 
     // File upload
-    $imageData = file_get_contents($_FILES['image']['tmp_name']);
-    $imageData = mysqli_real_escape_string($conn, $imageData); // real escape string to prevent sql attacks
+    $imageData = file_get_contents($file['tmp_name']);
+    $imageData = mysqli_real_escape_string($conn, $imageData);
 
     // Hash the password for security
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -51,6 +61,7 @@
     mysqli_close($conn);
     ?>
 </div>
+
 
 
 
