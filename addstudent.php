@@ -95,8 +95,8 @@
 </div>
 
 <?php
-        echo template("templates/default.php", $data);
-    } else {
+    echo template("templates/default.php", $data);
+    } else {    
         header("Location: index.php");
     }
 
@@ -111,8 +111,9 @@
         const imageInput = document.getElementById('image');
         const imagePreview = document.getElementById('image-preview');
         const imageLabel = document.querySelector('.image-label');
-        const removeImageButton = document.getElementById('remove-image');
 
+        const removeImageButton = document.getElementById('remove-image');
+        // Display image preview when image is selected
         imageInput.addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
@@ -126,7 +127,7 @@
                 reader.readAsDataURL(file);
             }
         });
-
+        // Remove the image preview when remove button is clicked
         removeImageButton.addEventListener('click', function() {
             imageInput.value = '';
             imagePreview.src = '';
@@ -135,6 +136,7 @@
             removeImageButton.style.display = 'none';
         });
 
+        // Form validation
         form.addEventListener('submit', function(event) {
             let valid = true;
 
@@ -175,8 +177,9 @@
                 valid = false;
             }
 
+            // Prevent form submission if invalid
             if (!valid) {
-                event.preventDefault(); // Prevent form submission if invalid
+                event.preventDefault();
             }
         });
     });
@@ -187,7 +190,7 @@
     .county-column,
     .country-column {
         position: relative;
-        top: -10px; /* Adjust the value as needed to move the columns up */
+        top: -10px;
     }
     .error-message {
         color: red;
@@ -198,7 +201,7 @@
 
     .submit-btn {
         text-align: center;
-        margin-top: -10px; /* Adjusted margin-top */
+        margin-top: -10px;
     }
 
     .submit-btn input[type="submit"] {
@@ -220,14 +223,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px; /* Increased padding */
-        margin: 45px auto; /* Decreased margin */
-        width: 85%; /* Slightly wider */
+        padding: 30px;
+        margin: 45px auto; 
+        width: 85%; 
         max-width: 1200px;
         background-color: #f4f4f4;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        height: 450px; /* Increased height */
+        height: 450px;
     }
 
     .form-row {
@@ -280,7 +283,7 @@
         align-items: center;
         border-radius: 10px;
         margin-right: 20px;
-        margin-bottom: 50px; /* Adjusted margin-bottom */
+        margin-bottom: 50px;
         overflow: hidden;
     }
 
