@@ -3,17 +3,15 @@ include("_includes/config.inc");
 include("_includes/dbconnect.inc");
 include("_includes/functions.inc");
 
-// This block of code checks if the admin / user is logged in
-// if the user isn't logged in, they will be redirected to login page
-// they must be logged in to view the table with all the students. 
 if (isset($_SESSION['id'])) {
     echo template("templates/partials/header.php");
     echo template("templates/partials/nav.php");
 
-    // Display feedback message
+    // Displays message
     if (isset($_SESSION['delete_message'])) {
         echo "<p class='error-message'>{$_SESSION['delete_message']}</p>";
-        unset($_SESSION['delete_message']); // Clear message after displaying
+        // Clear message after displaying
+        unset($_SESSION['delete_message']);
     }
 
     $sql = "SELECT * FROM student";
@@ -116,39 +114,6 @@ echo template("templates/partials/footer.php");
     tr:hover {
         background-color: #BCBAC5;
         transition: background-color 0.3s ease;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-        th, td {
-            font-size: 12px;
-            padding: 4px;
-        }
-
-        th, td:nth-child(n+6) {
-            display: none;
-        }
-
-        td img {
-            width: 30px;
-            height: auto;
-        }
-    }
-
-    @media (max-width: 480px) {
-        th, td {
-            font-size: 10px;
-            padding: 2px;
-        }
-
-        th, td:nth-child(n+4) {
-            display: none;
-        }
-
-        td img {
-            width: 20px;
-            height: auto;
-        }
     }
 
     /* Styles for the submit button */
