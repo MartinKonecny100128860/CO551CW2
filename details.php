@@ -1,5 +1,4 @@
 <?php
-
     include("_includes/config.inc");
     include("_includes/dbconnect.inc");
     include("_includes/functions.inc");
@@ -13,23 +12,34 @@
     // If the form has been submitted
     if (isset($_POST['submit'])) {
 
+        // Sanitize user inputs to prevent SQL injection
+        $firstname = mysqli_real_escape_string($conn, $_POST['txtfirstname']);
+        $lastname = mysqli_real_escape_string($conn, $_POST['txtlastname']);
+        $house = mysqli_real_escape_string($conn, $_POST['txthouse']);
+        $town = mysqli_real_escape_string($conn, $_POST['txttown']);
+        $county = mysqli_real_escape_string($conn, $_POST['txtcounty']);
+        $country = mysqli_real_escape_string($conn, $_POST['txtcountry']);
+        $postcode = mysqli_real_escape_string($conn, $_POST['txtpostcode']);
+        $studentid = mysqli_real_escape_string($conn, $_SESSION['id']);
+
         // Build an SQL statement to update the student details
         $sql = "UPDATE student SET 
-                firstname = '" . $_POST['txtfirstname'] . "',
-                lastname = '" . $_POST['txtlastname'] . "',
-                house = '" . $_POST['txthouse'] . "',
-                town = '" . $_POST['txttown'] . "',
-                county = '" . $_POST['txtcounty'] . "',
-                country = '" . $_POST['txtcountry'] . "',
-                postcode = '" . $_POST['txtpostcode'] . "' 
-                WHERE studentid = '" . $_SESSION['id'] . "';";
+            firstname = '$firstname',
+            lastname = '$lastname',
+            house = '$house',
+            town = '$town',
+            county = '$county',
+            country = '$country',
+            postcode = '$postcode' 
+            WHERE studentid = '$studentid';";
         $result = mysqli_query($conn, $sql);
 
         $data['content'] = "<div class='message-container'><h1>Your details have been updated</h1></div>";
 
     } else {
         // Build an SQL statement to return the student record with the id that matches that of the session variable
-        $sql = "SELECT * FROM student WHERE studentid='" . $_SESSION['id'] . "';";
+        $studentid = mysqli_real_escape_string($conn, $_SESSION['id']);
+        $sql = "SELECT * FROM student WHERE studentid='$studentid';";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result);
 
@@ -52,7 +62,7 @@
                         <input name="txthouse" type="text" value="{$row['house']}" />
                     </div>
                     <div class="form-row">
-                        <label for="txttown"><i class="fas fa-map-marker-alt"></i> Town:</label>
+                        <label for="txttown"><i class="fas fa-map"></i> Town:</label>
                         <input name="txttown" type="text" value="{$row['town']}" />
                     </div>
                     <div class="form-row">
@@ -85,103 +95,106 @@
 ?>
 
 <style>
-    .form-row input[type="text"],
-    input[type="submit"] {
+/* General Styles */
+body {
     font-family: 'Roboto', sans-serif;
-    }
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
 
-    .submit-btn {
-        float: right;
-    }
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
 
-    .submit-btn input[type="submit"] {
-        background-color: #22254E;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s; 
-        width: 1200px; 
-        margin-top: 10px; 
-    }
+/* Form Styles */
+.form-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-    .submit-btn input[type="submit"]:hover {
-        background-color: #CEDDF4;
-    }
+.form-row {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
 
-    .form-row:nth-child(even),
-    .form-row:nth-child(odd) {
-        background-color: #f2f2f2;
-        border-radius: 5px; 
-    }
+.form-row label {
+    width: 200px;
+    flex: 0 0 200px;
+    font-size: 18px;
+    margin-bottom: 0;
+}
 
-    .form-row:hover {
-        background-color: #BCBAC5;
-    }
+.form-row input[type="text"] {
+    flex: 1;
+    height: 40px;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-    .form-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
+/* Button Styles */
+.submit-btn input[type="submit"] {
+    background-color: #22254E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 98.5%;
+}
 
-    .form-row label {
-        width: 250px;
-        flex: 0 0 250px;
-        font-size: 18px;
-        margin-bottom: 0;
-        padding-left: 5px; 
-    }
+.submit-btn input[type="submit"]:hover {
+    background-color: #CEDDF4;
+}
 
+/* Message Styles */
+.message-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto; /* Change margin to center horizontally */
+    width: 400px; /* Increase width */
+    height: 250px; /* Keep height */
+    position: absolute; /* Position absolutely */
+    top: 50%; /* Place it at the vertical center */
+    left: 55%; /* Move slightly to the right */
+    transform: translate(-50%, -50%); /* Adjust for centering */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+
+
+.message-container h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
     .form-row input[type="text"] {
-        width: calc(100% - 200px);
-        height: 40px;
-        font-size: 16px;
-        padding: 10px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        float: right;
-        margin-right: 1px; 
+        width: calc(50% - 10px);
+        margin-right: 20px;
     }
 
-    @media (min-width: 768px) {
-        .form-row input[type="text"] {
-            width: calc(100% - 200px);
-            margin-right: 1px;
-        }
-
-        .form-row:last-child input[type="text"] {
-            margin-right: 0;
-        }
-
-        .submit-btn input[type="submit"] {
-            width: 1200px; 
-            margin-top: 0;
-        }
+    .form-row:last-child input[type="text"] {
+        margin-right: 0;
     }
-
-    .message-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50vh;
-        text-align: center;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin: 20px auto;
-        width: 50%; 
-    }
-
-    .message-container h1 {
-        font-size: 24px;
-        color: #333;
-    }
+}
 </style>

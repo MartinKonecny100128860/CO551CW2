@@ -6,7 +6,9 @@ include("_includes/functions.inc");
 // Check if the user is logged in
 if (isset($_SESSION['id'])) {
     // Build SQL statement to select a student's modules
-    $sql = "SELECT * FROM studentmodules sm, module m WHERE m.modulecode = sm.modulecode AND sm.studentid = '" . $_SESSION['id'] ."';";
+    $sql = "SELECT * FROM studentmodules sm, module m 
+    WHERE m.modulecode = sm.modulecode AND 
+    sm.studentid = '" . $_SESSION['id'] ."';";
     $result = mysqli_query($conn, $sql);
 
     // Prepare table content
@@ -20,7 +22,6 @@ if (isset($_SESSION['id'])) {
     }
     $tableContent .= "</tbody></table>";
 
-    // Render the template with the centered table and navbar
     echo template("templates/partials/header.php");
     echo template("templates/partials/nav.php");
     echo "
@@ -47,6 +48,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f4f4f4; /* Updated background color */
 }
 
 .table-wrapper {
@@ -65,6 +67,7 @@ body {
     border-radius: 10px; /* Round edges of the table */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
     overflow: hidden; /* Clip children to rounded corners */
+    background-color: #fff; /* Updated background color */
 }
 
 .module-table th, .module-table td {
@@ -113,4 +116,5 @@ body {
     margin-bottom: 20px; /* Space between heading and table */
     color: #333; /* Color for heading */
 }
+
 </style>

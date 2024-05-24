@@ -11,9 +11,13 @@
 
     // If a module has been selected
     if (isset($_POST['selmodule'])) {
-        $sql = "insert into studentmodules values ('" .  $_SESSION['id'] . "','" . $_POST['selmodule'] . "');";
+        // Sanitize session id and selected module to prevent SQL injection
+        $studentId = mysqli_real_escape_string($conn, $_SESSION['id']);
+        $selectedModule = mysqli_real_escape_string($conn, $_POST['selmodule']);
+
+        $sql = "insert into studentmodules values ('$studentId','$selectedModule');";
         $result = mysqli_query($conn, $sql);
-        $data['content'] .= "<p>The module " . $_POST['selmodule'] . " has been assigned to you</p>";
+        $data['content'] .= "<p>The module $selectedModule has been assigned to you</p>";
     } else {
 
         // Build SQL statement that selects all the modules
@@ -44,6 +48,7 @@
     echo template("templates/partials/footer.php");
 
 ?>
+
 
 <style>
 /* CSS Styles */

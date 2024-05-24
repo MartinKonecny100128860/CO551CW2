@@ -41,19 +41,20 @@ if (isset($_SESSION['id'])) {
         // Fetch each record as an associative array
         while ($row = mysqli_fetch_assoc($result)) {
             $imageData = base64_encode($row['image_path']);
-            $data['content'] .= "<tr>
-                                    <td><input type='checkbox' name='students[]' value='{$row['studentid']}'></td>
-                                    <td>{$row['studentid']}</td>
-                                    <td>{$row['firstname']}</td>
-                                    <td>{$row['lastname']}</td>
-                                    <td>{$row['dob']}</td>
-                                    <td>{$row['house']}</td>
-                                    <td>{$row['town']}</td>
-                                    <td>{$row['county']}</td>
-                                    <td>{$row['country']}</td>
-                                    <td>{$row['postcode']}</td>
-                                    <td><img src='data:image/jpeg;base64,{$imageData}' alt='Student Image' style='width: 50px; height: auto;'></td>
-                                </tr>";
+            $data['content'] .= 
+            "<tr>
+                <td><input type='checkbox' name='students[]' value='{$row['studentid']}'></td>
+                <td>{$row['studentid']}</td>
+                <td>{$row['firstname']}</td>
+                <td>{$row['lastname']}</td>
+                <td>{$row['dob']}</td>
+                <td>{$row['house']}</td>
+                <td>{$row['town']}</td>
+                <td>{$row['county']}</td>
+                <td>{$row['country']}</td>
+                <td>{$row['postcode']}</td>
+                <td><img src='data:image/jpeg;base64,{$imageData}' alt='Student Image' style='width: 50px; height: auto;'></td>
+            </tr>";
         }
 
         $data['content'] .= "</table>";
@@ -73,6 +74,7 @@ if (isset($_SESSION['id'])) {
 
 echo template("templates/partials/footer.php");
 ?>
+
 
 <style>
     /* CSS Styles for table container */
