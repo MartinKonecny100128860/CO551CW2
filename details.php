@@ -85,116 +85,101 @@
         EOD;
     }
 
-    // Render the template
     echo template("templates/default.php", $data);
 
     } else {
     header("Location: index.php");
     }
-    echo template("templates/partials/footer.php");
 ?>
 
 <style>
-/* General Styles */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-}
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
 
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
 
-/* Form Styles */
-.form-container {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
+    /* Form Styles */
+    .form-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
 
-.form-row {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
+    .form-row {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
 
-.form-row label {
-    width: 200px;
-    flex: 0 0 200px;
-    font-size: 18px;
-    margin-bottom: 0;
-}
+    .form-row label {
+        width: 200px;
+        flex: 0 0 200px;
+        font-size: 18px;
+        margin-bottom: 0;
+    }
 
-.form-row input[type="text"] {
-    flex: 1;
-    height: 40px;
-    font-size: 16px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Button Styles */
-.submit-btn input[type="submit"] {
-    background-color: #22254E;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 98.5%;
-}
-
-.submit-btn input[type="submit"]:hover {
-    background-color: #CEDDF4;
-}
-
-/* Message Styles */
-.message-container {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px auto; /* Change margin to center horizontally */
-    width: 400px; /* Increase width */
-    height: 250px; /* Keep height */
-    position: absolute; /* Position absolutely */
-    top: 50%; /* Place it at the vertical center */
-    left: 55%; /* Move slightly to the right */
-    transform: translate(-50%, -50%); /* Adjust for centering */
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-}
-
-
-
-.message-container h1 {
-    font-size: 24px;
-    color: #333;
-}
-
-/* Media Queries */
-@media (min-width: 768px) {
     .form-row input[type="text"] {
-        width: calc(50% - 10px);
-        margin-right: 20px;
+        flex: 1;
+        height: 40px;
+        font-size: 16px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
 
-    .form-row:last-child input[type="text"] {
-        margin-right: 0;
+    /* Button Styles */
+    .submit-btn input[type="submit"] {
+        background-color: #22254E;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 98.5%;
     }
-}
+
+    .submit-btn input[type="submit"]:hover {
+        background-color: #CEDDF4;
+    }
+
+    /* Message Styles */
+    .message-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        width: 400px; 
+        height: 250px; 
+        position: absolute; 
+        top: 50%;
+        left: 55%;
+        transform: translate(-50%, -50%); 
+        display: flex;
+        justify-content: center;
+        align-items: center; /
+    }
+
+    .message-container h1 {
+        font-size: 24px;
+        color: #333;
+    }
+
 </style>
