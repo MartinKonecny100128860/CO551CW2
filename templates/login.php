@@ -201,8 +201,6 @@
         </style>
     </head>
 
-    
-
     <body>
         <!-- Entire login box section -->
         <div class="container">
