@@ -1,9 +1,10 @@
 <?php
+    // Includes neccessary configuration, functions and database conection files
     include("_includes/config.inc");
     include("_includes/dbconnect.inc");
     include("_includes/functions.inc");
 
-    // check logged in
+    // check if logged in
     if (isset($_SESSION['id'])) {
 
     echo template("templates/partials/header.php");
@@ -38,101 +39,92 @@
         $data['content'] .= "</div>";
     }
 
-    // render the template
+    // includes templates
     echo template("templates/default.php", $data);
 
+    // if user isnt logged in they will be redirected to lofin page
     } else {
     header("Location: index.php");
     }
-
-    echo template("templates/partials/footer.php");
 
 ?>
 
 
 <style>
-/* CSS Styles */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    /* CSS Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 600px; /* Enlarged width */
-    width: 100%;
-    padding: 40px; /* Increased padding */
-    border: 1px solid #ddd;
-    border-radius: 10px; /* More rounded corners */
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    margin-left: -60px
-}
-
-.form-container:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-label {
-    font-size: 24px; /* Enlarged font size */
-    margin-bottom: 20px;
-    width: 100%;
-    text-align: left;
-}
-
-select {
-    width: 100%;
-    padding: 16px; /* Increased padding */
-    margin-bottom: 20px; /* Reduced margin-bottom */
-    margin-top: 10px; /* Added margin-top for more space */
-    border: 1px solid #ddd;
-    border-radius: 8px; /* More rounded corners */
-    font-size: 20px; /* Increased font size */
-    background-color: #fafafa;
-    transition: border-color 0.3s ease;
-}
-
-select:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-input[type='submit'] {
-    width: 100%;
-    padding: 16px; /* Increased padding */
-    margin-top: 10px; /* Added margin-top to move the button slightly above */
-    border: none;
-    border-radius: 8px; /* More rounded corners */
-    background-color: #22254E;
-    color: white;
-    font-size: 20px; /* Increased font size */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-input[type='submit']:hover {
-    background-color: #CEDDF4;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 600px) {
+    /* Container which holds the drop down with modules*/ 
     .form-container {
-        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 600px;
+        width: 100%;
+        padding: 40px;
+        border: 1px solid #ddd;
+        border-radius: 10px; 
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-left: -60px
     }
 
-    label, select, input[type='submit'] {
-        font-size: 18px;
+    /* Hoover effect for the drop down */
+    .form-container:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
-}
+
+    label {
+        font-size: 24px;
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: left;
+    }
+
+    select {
+        width: 100%;
+        padding: 16px; 
+        margin-bottom: 20px;
+        margin-top: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px; 
+        font-size: 20px;
+        background-color: #fafafa;
+        transition: border-color 0.3s ease;
+    }
+
+    select:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+
+    /* Button styles */ 
+    input[type='submit'] {
+        width: 100%;
+        padding: 16px; 
+        margin-top: 10px; 
+        border: none;
+        border-radius: 8px;
+        background-color: #22254E;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type='submit']:hover {
+        background-color: #CEDDF4;
+    }
 </style>
