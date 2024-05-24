@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
     <style>
+        /* Styling for the body */
         body {
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -18,40 +19,43 @@
             position: relative;
         }
         
+        /* Adjustment for image opacity here */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity here */
+            background-color: rgba(0, 0, 0, 0.5);
         }
-        
+        /* container which holds the error message */
         .error-container {
             background-color: #ffffff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Added box shadow */
-            padding: 60px 40px; /* Increased padding */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); 
+            padding: 60px 40px; 
             border-radius: 8px;
             max-width: 350px;
             width: 100%;
             text-align: center;
             position: relative;
-            z-index: 1; /* Ensure the container stays above the overlay */
-            height: auto; /* Allow container height to adjust based on content */
+            z-index: 1;
+            height: auto;
         }
-        
+
+        /* Error message styling */
         .error-message {
             color: #ff0000;
             margin-bottom: 20px;
         }
         
         .error-notice {
-            margin-top: 40px; /* Moved the paragraph lower */
-            font-size: 18px; /* Enlarged the font size */
-            color: #22254E; /* Set the color to red */
+            margin-top: 40px;
+            font-size: 18px;
+            color: #22254E;
             font-weight: bold;
         }
         
+        /* Back button styles*/ 
         .back-button {
             background: #22254E;
             color: #fff;
@@ -60,7 +64,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
-            margin-top: 20px; /* Adjusted margin top */
+            margin-top: 20px;
             font-weight: 700;
         }
         
@@ -84,11 +88,13 @@
             }
             ?>
         </h2>
-        <p class="error-notice">Please ensure your details are correct and try again.</p> <!-- Moved the paragraph lower -->
+        <!-- Error notice message -->
+        <p class="error-notice">Please ensure your details are correct and try again.</p>
         <button class="back-button" onclick="goBack()">Back to Login</button>
     </div>
 
     <script>
+        // function to go back to login page with details saved
         function goBack() {
             window.history.back();
         }
